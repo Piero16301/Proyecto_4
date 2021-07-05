@@ -12,6 +12,7 @@ class ActivationFunction{
 
   public:
   ActivationFunction(string tipo_){
+    
     if (tipo_ =="sigmuid"){
       tipo = 1;
     }
@@ -24,7 +25,6 @@ class ActivationFunction{
   }
 
   Mdouble execute (Mdouble input){
-    cout<<"exec"<<input;
     Mdouble aux(input.size1(),input.size2());
     switch(tipo){
       case 1:
@@ -48,8 +48,30 @@ class ActivationFunction{
     return aux;
   }
 
+  double derivate(double input){
+    double res = 0.0;
+    switch(tipo){
+      case 1:
+        res = der_sigmuid(input);
+        break;
+      case 2:
+        res = der_relu(input);
+        break;
+      case 3:
+        res = pow(1/cosh(input),2);
+        break;
+    }
+    return res;
+  }
 
-
+  double der_relu(double input){
+    if (input<=0)return 0;
+    else return 1.0;
+  }
+  double der_sigmuid(double input){
+    double aux = 1.0/(1.0+exp(-input));
+    return (aux)*(1-aux);
+  }
   double relu(double input){
     if (input<=0)return 0;
     else return input;

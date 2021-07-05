@@ -5,6 +5,10 @@
 #include <boost/numeric/ublas/io.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/operation.hpp>
+#include <boost/random.hpp>
+#include <iostream>
+#include <ctime>
+#include <cstdint>
 #include <string>
 #include <math.h>
 #include <fstream>

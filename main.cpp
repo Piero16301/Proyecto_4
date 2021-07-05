@@ -2,31 +2,21 @@
 #include "macros.cpp"
 #include <iostream>
 
-
+typedef boost::numeric::ublas::matrix<double> Mdouble;
 int main() {
-  //int a,b;
-  //cin>>a>>b;
-    //Mdouble A(a,b,1), B(b,6,1),C;
-    //Mdouble A_,B_,C;
-    /*
-    for(int i = 0;i<2;i++){
-      for(int j = 0;j<4;j++){
-        A(i,j)=1;
-        B(j,i)=1;
-      }  
-    }  */
-    //A_ = A;
-    //B_ = B;
-    //C = boost::numeric::ublas::prod(A,B);
-    ActivationFunction f = ActivationFunction("relu"); 
-    vector<int> cant = {5,5};
-    int A[2] = {3,3};
+
+    auto relu = new ActivationFunction("RELU"); 
+    auto sigmuid = new ActivationFunction("sigmuid");
+    auto tanh = new ActivationFunction("Tanh");
     
-    MLP test = MLP(cant,A[0],A[1],f);
-    test.forward();
-    test.load_data();
-    test.shuffleAndSplit();
-    //cout<<A<<B<<C;
+    vector<ActivationFunction*>functions ={sigmuid,sigmuid,sigmuid,sigmuid,sigmuid,sigmuid};
+    vector<int> cant = {5,4};
+    int n_outputs = 1;
+    
+    MLP test = MLP(cant,n_outputs,functions);
+    test.fit(50, 0.9);
+    test.testing();
+
     
     
     return 0;
